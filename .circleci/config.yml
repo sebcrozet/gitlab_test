@@ -48,3 +48,9 @@ jobs:
 #      - run:
 #          name: test nalgebra-glm
 #          command: cd nalgebra-glm; cargo test --verbose;
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
