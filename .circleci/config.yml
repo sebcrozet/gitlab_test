@@ -8,8 +8,7 @@ jobs:
       - checkout
       - run:
           name: Build all
-          command:
-            - >-
+          command: |
               cargo build --verbose -p nalgebra;
               cargo build --verbose -p nalgebra --features "arbitrary";
               cargo build --verbose -p nalgebra --features "mint";
