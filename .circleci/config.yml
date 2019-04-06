@@ -1,14 +1,26 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+
+
+executors:
+  my-executor:
     docker:
       - image: rust:latest
+    working_directory: /tmp
 
+
+
+jobs:
+  build:
+    executor: my-executor
     steps:
       - checkout
       - run:
           name: build
           command: cargo build --verbose -p nalgebra;
+      - persist_to_workspace:
+          root: .
+          paths:
+            - target
 #      - run:
 #          name: build arbitrary
 #          command: cargo build --verbose -p nalgebra --features "arbitrary";
@@ -31,14 +43,14 @@ jobs:
 #          name: build all-features
 #          command: cargo build --verbose -p nalgebra --all-features;
   test:
-    docker:
-      - image: rust:latest
-
+    executor: my-executor
     steps:
       - checkout
       - run:
           name: test
           command: cargo test --verbose;
+      - attach_to_workspace:
+          at: target
 #      - run:
 #          name: test arbitrary
 #          command: cargo test --verbose "arbitrary";
@@ -48,6 +60,7 @@ jobs:
 #      - run:
 #          name: test nalgebra-glm
 #          command: cd nalgebra-glm; cargo test --verbose;
+
 workflows:
   version: 2
   build_and_test:
