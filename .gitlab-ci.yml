@@ -37,6 +37,10 @@ stages:
     - cargo build --verbose -p nalgebra --features "abomonation-serialize";
     - cargo build --verbose -p nalgebra --features "debug";
     - cargo build --verbose -p nalgebra --all-features
+    - cargo test --verbose;
+    - cargo test --verbose "arbitrary";
+    - cargo test --verbose --all-features;
+    - cd nalgebra-glm; cargo test --verbose;
 
 x86_64-unknown-linux-gnu-1.24:
   <<: *build
