@@ -1,0 +1,40 @@
+[package]
+name    = "nalgebra-lapack"
+version = "0.10.0"
+authors = [ "Sébastien Crozet <developer@crozet.re>", "Andrew Straw <strawman@astraw.com>" ]
+
+description   = "Linear algebra library with transformations and satically-sized or dynamically-sized matrices."
+documentation = "http://nalgebra.org/doc/nalgebra/index.html"
+homepage      = "http://nalgebra.org"
+repository    = "https://github.com/rustsim/nalgebra"
+readme        = "README.md"
+keywords      = [ "linear", "algebra", "matrix", "vector" ]
+license       = "BSD-3-Clause"
+edition       = "2018"
+
+[features]
+serde-serialize = [ "serde", "serde_derive" ]
+
+# For BLAS/LAPACK
+default    = ["openblas"]
+openblas   = ["lapack-src/openblas"]
+netlib     = ["lapack-src/netlib"]
+accelerate = ["lapack-src/accelerate"]
+intel-mkl  = ["lapack-src/intel-mkl"]
+
+[dependencies]
+nalgebra      = { version = "0.18", path = ".." }
+num-traits    = "0.2"
+num-complex   = { version = "0.2", default-features = false }
+alga          = { version = "0.9", default-features = false }
+serde         = { version = "1.0", optional = true }
+serde_derive  = { version = "1.0", optional = true }
+lapack        = { version = "0.16", default-features = false }
+lapack-src    = { version = "0.2", default-features = false }
+# clippy = "*"
+
+[dev-dependencies]
+nalgebra   = { version = "0.18", path = "..", features = [ "arbitrary" ] }
+quickcheck = "0.8"
+approx     = "0.3"
+rand       = "0.6"
