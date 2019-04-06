@@ -45,11 +45,11 @@ jobs:
     executor: my-executor
     steps:
       - checkout
+      - attach_workspace:
+          at: target
       - run:
           name: test
           command: cargo test --verbose;
-      - attach_workspace:
-          at: target
 #      - run:
 #          name: test arbitrary
 #          command: cargo test --verbose "arbitrary";
