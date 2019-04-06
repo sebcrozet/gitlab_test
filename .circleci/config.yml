@@ -9,36 +9,36 @@ jobs:
       - run:
           name: build
           command: cargo build --verbose -p nalgebra;
-      -run:
+      - run:
           name: build arbitrary
           command: cargo build --verbose -p nalgebra --features "arbitrary";
-      -run:
+      - run:
           name: build mint
           command: cargo build --verbose -p nalgebra --features "mint";
-      -run:
+      - run:
           name: build alloc
           command: cargo build --verbose -p nalgebra --features "alloc";
-      -run:
+      - run:
         name: build serde-serialize
         command: cargo build --verbose -p nalgebra --features "serde-serialize";
-      -run:
+      - run:
         name: build abomonation-serialize
         command: cargo build --verbose -p nalgebra --features "abomonation-serialize";
-      -run:
+      - run:
         name: build debug
         command: cargo build --verbose -p nalgebra --features "debug";
-      -run:
+      - run:
         name: build all-features
         command: cargo build --verbose -p nalgebra --all-features;
-      -run:
+      - run:
         name: test
         command: cargo test --verbose;
-      -run:
+      - run:
         name: test arbitrary
         command: cargo test --verbose "arbitrary";
-      -run:
+      - run:
         name: test all-features
         command: cargo test --verbose --all-features;
-      -run:
+      - run:
         name: test nalgebra-glm
         command: cd nalgebra-glm; cargo test --verbose;
