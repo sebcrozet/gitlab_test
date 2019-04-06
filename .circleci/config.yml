@@ -38,7 +38,6 @@ jobs:
       - checkout
       - run:
           name: test
-          requires: build
           command: cargo test --verbose;
 #      - run:
 #          name: test arbitrary
@@ -54,4 +53,6 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test
+      - test:
+          requires:
+            - build
