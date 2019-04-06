@@ -49,7 +49,7 @@ jobs:
       - run:
           name: test
           command: cargo test --verbose;
-      - attach_to_workspace:
+      - attach_workspace:
           at: target
 #      - run:
 #          name: test arbitrary
