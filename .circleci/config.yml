@@ -19,7 +19,7 @@ jobs:
               cargo build --verbose -p nalgebra --all-features
               cargo test --verbose;
               cargo test --verbose "arbitrary";
-              cargo test --verbose --all-features;
+              cargo test --verbose --all-features; 
               cd nalgebra-glm; cargo test --verbose;
 
       - run:
