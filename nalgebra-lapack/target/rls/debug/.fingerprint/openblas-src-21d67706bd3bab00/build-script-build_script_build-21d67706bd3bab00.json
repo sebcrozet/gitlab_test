@@ -1,1 +1,0 @@
-{"rustc":301630402656708577,"features":"[\"cblas\", \"default\", \"lapacke\"]","target":13123923088509177768,"profile":7282077418741342047,"path":4729987904036687897,"deps":[],"local":[{"Precalculated":"0.5.6"}],"rustflags":[],"edition":"Edition2015"}

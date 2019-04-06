@@ -1,1 +1,0 @@
-{"rustc":301630402656708577,"features":"[\"openblas\", \"openblas-src\"]","target":3507257841681384452,"profile":14245719688690734572,"path":13871111057579667534,"deps":[["openblas-src v0.5.6","openblas_src",4550925915872771526]],"local":[{"Precalculated":"0.1.4"}],"rustflags":[],"edition":"Edition2015"}
