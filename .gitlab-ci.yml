@@ -25,14 +25,22 @@ stages:
     - rustup target add $TARGET || true # Ignore failures when the target and toolchain are the same
     - cargo update
   script:
-    - cargo build --target=$TARGET
-    - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
-    - if [[ -z $DISABLE_TESTS ]]; then cargo build --tests --target=$TARGET; fi
-    - if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
+#    - cargo build --target=$TARGET
+#    - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
+#    - if [[ -z $DISABLE_TESTS ]]; then cargo build --tests --target=$TARGET; fi
+#    - if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
+    - cargo build --verbose -p nalgebra;
+    - cargo build --verbose -p nalgebra --features "arbitrary";
+    - cargo build --verbose -p nalgebra --features "mint";
+    - cargo build --verbose -p nalgebra --features "alloc";
+    - cargo build --verbose -p nalgebra --features "serde-serialize";
+    - cargo build --verbose -p nalgebra --features "abomonation-serialize";
+    - cargo build --verbose -p nalgebra --features "debug";
+    - cargo build --verbose -p nalgebra --all-features
 
 x86_64-unknown-linux-gnu-1.24:
   <<: *build
-  image: "rust:1.24"
+  image: "rust:latest"
   variables:
     EXTRA_PACKAGES: "libudev-dev"
     TARGET: x86_64-unknown-linux-gnu
