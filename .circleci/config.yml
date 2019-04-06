@@ -9,7 +9,7 @@ jobs:
       - run:
           name: build
           command: cargo build --verbose -p nalgebra;
-      - run: 
+      - run:
           name: build arbitrary
           command: cargo build --verbose -p nalgebra --features "arbitrary";
       - run:
