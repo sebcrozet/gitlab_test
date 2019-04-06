@@ -16,6 +16,7 @@ jobs:
       - run:
           name: build
           command: cargo build --verbose -p nalgebra;
+      - run: mv ~/.cargo target/.
       - persist_to_workspace:
           root: .
           paths:
@@ -47,6 +48,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: target
+      - run: mv target/.cargo ~/.cargo
       - run:
           name: test
           command: cargo test --verbose;
