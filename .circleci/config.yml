@@ -7,21 +7,38 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build all
-          command: |
-              cargo build --verbose -p nalgebra;
-              cargo build --verbose -p nalgebra --features "arbitrary";
-              cargo build --verbose -p nalgebra --features "mint";
-              cargo build --verbose -p nalgebra --features "alloc";
-              cargo build --verbose -p nalgebra --features "serde-serialize";
-              cargo build --verbose -p nalgebra --features "abomonation-serialize";
-              cargo build --verbose -p nalgebra --features "debug";
-              cargo build --verbose -p nalgebra --all-features
-              cargo test --verbose;
-              cargo test --verbose "arbitrary";
-              cargo test --verbose --all-features; 
-              cd nalgebra-glm; cargo test --verbose;
-
-      - run:
-          name: Print the Current Time
-          command: date
+          name: build
+          command: cargo build --verbose -p nalgebra;
+      -run:
+          name: build arbitrary
+          command: cargo build --verbose -p nalgebra --features "arbitrary";
+      -run:
+          name: build mint
+          command: cargo build --verbose -p nalgebra --features "mint";
+      -run:
+          name: build alloc
+          command: cargo build --verbose -p nalgebra --features "alloc";
+      -run:
+        name: build serde-serialize
+        command: cargo build --verbose -p nalgebra --features "serde-serialize";
+      -run:
+        name: build abomonation-serialize
+        command: cargo build --verbose -p nalgebra --features "abomonation-serialize";
+      -run:
+        name: build debug
+        command: cargo build --verbose -p nalgebra --features "debug";
+      -run:
+        name: build all-features
+        command: cargo build --verbose -p nalgebra --all-features;
+      -run:
+        name: test
+        command: cargo test --verbose;
+      -run:
+        name: test arbitrary
+        command: cargo test --verbose "arbitrary";
+      -run:
+        name: test all-features
+        command: cargo test --verbose --all-features;
+      -run:
+        name: test nalgebra-glm
+        command: cd nalgebra-glm; cargo test --verbose;
