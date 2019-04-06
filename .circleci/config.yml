@@ -38,6 +38,7 @@ jobs:
       - checkout
       - run:
           name: test
+          requires: build
           command: cargo test --verbose;
 #      - run:
 #          name: test arbitrary
