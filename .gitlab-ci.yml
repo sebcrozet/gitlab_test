@@ -1,0 +1,56 @@
+variables:
+  APT_CACHE_DIR: apt-cache
+  PKG_CONFIG_ALLOW_CROSS: 1 # Enable cross compilation for pkg_config
+
+cache:
+  key: "$CI_JOB_NAME"
+  untracked: true
+  paths:
+    - apt-cache/
+    - cargo/
+    - target/
+
+stages:
+  - build
+  - lint
+
+.build_template: &build
+  image: "rust:latest"
+  stage: build
+  before_script:
+    - mkdir -pv $APT_CACHE_DIR
+    - apt-get -qq update
+    - apt-get -o dir::cache::archives="$APT_CACHE_DIR" -qq -y install build-essential curl git pkg-config $EXTRA_PACKAGES
+    - export PATH="/root/.cargo/bin:$PATH"
+    - rustup target add $TARGET || true # Ignore failures when the target and toolchain are the same
+    - cargo update
+  script:
+    - cargo build --target=$TARGET
+    - if [[ -z $DISABLE_TESTS ]]; then cargo build --examples --target=$TARGET; fi
+    - if [[ -z $DISABLE_TESTS ]]; then cargo build --tests --target=$TARGET; fi
+    - if [[ -z $DISABLE_TESTS ]]; then cargo test --target=$TARGET; fi
+
+x86_64-unknown-linux-gnu-1.24:
+  <<: *build
+  image: "rust:1.24"
+  variables:
+    EXTRA_PACKAGES: "libudev-dev"
+    TARGET: x86_64-unknown-linux-gnu
+
+rustfmt:
+  image: "rust:latest" # Use the latest rust to get the newest rustfmt
+  stage: lint
+  script:
+    - rustup component add rustfmt-preview
+    - cargo fmt -- --check
+
+clippy:
+  <<: *build
+  image: "rust:latest" # Use the latest rust to get the newest clippy
+  variables:
+    EXTRA_PACKAGES: "libudev-dev"
+    TARGET: x86_64-unknown-linux-gnu
+  stage: lint
+  script:
+    - rustup component add clippy-preview
+    - cargo clippy
