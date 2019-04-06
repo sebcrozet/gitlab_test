@@ -14,7 +14,7 @@ action "Build all_features" {
   runs = "cargo"
   args = "build --all-features"
 }
-
+ 
 action "Tests" {
   uses = "docker://rust:latest"
   runs = "cargo"
