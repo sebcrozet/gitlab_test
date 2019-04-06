@@ -9,36 +9,42 @@ jobs:
       - run:
           name: build
           command: cargo build --verbose -p nalgebra;
-      - run: 
-          name: build arbitrary
-          command: cargo build --verbose -p nalgebra --features "arbitrary";
-      - run:
-          name: build mint
-          command: cargo build --verbose -p nalgebra --features "mint";
-      - run:
-          name: build alloc
-          command: cargo build --verbose -p nalgebra --features "alloc";
-      - run:
-          name: build serde-serialize
-          command: cargo build --verbose -p nalgebra --features "serde-serialize";
-      - run:
-          name: build abomonation-serialize
-          command: cargo build --verbose -p nalgebra --features "abomonation-serialize";
-      - run:
-          name: build debug
-          command: cargo build --verbose -p nalgebra --features "debug";
-      - run:
-          name: build all-features
-          command: cargo build --verbose -p nalgebra --all-features;
+#      - run:
+#          name: build arbitrary
+#          command: cargo build --verbose -p nalgebra --features "arbitrary";
+#      - run:
+#          name: build mint
+#          command: cargo build --verbose -p nalgebra --features "mint";
+#      - run:
+#          name: build alloc
+#          command: cargo build --verbose -p nalgebra --features "alloc";
+#      - run:
+#          name: build serde-serialize
+#          command: cargo build --verbose -p nalgebra --features "serde-serialize";
+#      - run:
+#          name: build abomonation-serialize
+#          command: cargo build --verbose -p nalgebra --features "abomonation-serialize";
+#      - run:
+#          name: build debug
+#          command: cargo build --verbose -p nalgebra --features "debug";
+#      - run:
+#          name: build all-features
+#          command: cargo build --verbose -p nalgebra --all-features;
+  test:
+    docker:
+      - image: rust:latest
+
+    steps:
+      - checkout
       - run:
           name: test
           command: cargo test --verbose;
-      - run:
-          name: test arbitrary
-          command: cargo test --verbose "arbitrary";
-      - run:
-          name: test all-features
-          command: cargo test --verbose --all-features;
-      - run:
-          name: test nalgebra-glm
-          command: cd nalgebra-glm; cargo test --verbose;
+#      - run:
+#          name: test arbitrary
+#          command: cargo test --verbose "arbitrary";
+#      - run:
+#          name: test all-features
+#          command: cargo test --verbose --all-features;
+#      - run:
+#          name: test nalgebra-glm
+#          command: cd nalgebra-glm; cargo test --verbose;
