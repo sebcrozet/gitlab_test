@@ -9,12 +9,12 @@ action "Build" {
   args = "build"
 }
 
-action "Build all_features" {
+action "Build all_features" { 
   uses = "docker://rust:latest"
   runs = "cargo"
   args = "build --all-features"
 }
- 
+
 action "Tests" {
   uses = "docker://rust:latest"
   runs = "cargo"
