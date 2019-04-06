@@ -21,7 +21,7 @@ jobs:
       - run: ls -Ra target
       - persist_to_workspace:
           root: .
-          paths: 
+          paths:
             - target
 #      - run:
 #          name: build arbitrary
