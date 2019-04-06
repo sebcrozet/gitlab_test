@@ -17,7 +17,8 @@ jobs:
           name: build
           command: cargo build --verbose -p nalgebra;
       - run: ls -Ra target
-      - run: mv $CARGO_HOME target/.
+      - run: mv $CARGO_HOME target/.cargo
+      - run: ls -Ra target
       - persist_to_workspace:
           root: .
           paths:
