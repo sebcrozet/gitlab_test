@@ -50,6 +50,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
+      - run: rm -rf $CARGO_HOME
       - run: mv target/.cargo $CARGO_HOME
       - run: ls -Ra target
       - run: ls -Ra $CARGO_HOME
